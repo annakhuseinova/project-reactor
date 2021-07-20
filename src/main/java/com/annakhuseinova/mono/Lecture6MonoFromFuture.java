@@ -1,4 +1,4 @@
-package com.annakhuseinova;
+package com.annakhuseinova.mono;
 
 import reactor.core.publisher.Mono;
 
