@@ -11,6 +11,6 @@ public class StockPricePublisher {
 //        AtomicInteger atomicInteger = new AtomicInteger(100);
 //        return Flux.interval(Duration.ofSeconds(1))
 //                .map(element -> atomicInteger.getAndAccumulate(atomicInteger, ));
-
+        return null;
     }
 }
