@@ -6,13 +6,14 @@ import reactor.core.publisher.Flux;
 public class Lecture6FluxCreate {
 
     public static void main(String[] args) {
-        Flux.create(fluxSink -> {
+
+        Flux.generate(synchronousSink -> {
             String country;
-            do {
-                country = Util.faker().country().name();
-                fluxSink.next(country);
-            } while (!country.toLowerCase().equals("canada"));
-            fluxSink.complete();
+            country = Util.faker().country().name();
+            synchronousSink.next(country);
+            if (country.toLowerCase().equals("canada")){
+                synchronousSink.complete();
+            }
         }).subscribe(Util.subscriber());
     }
 }
