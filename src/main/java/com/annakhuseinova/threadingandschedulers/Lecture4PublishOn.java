@@ -2,26 +2,23 @@ package com.annakhuseinova.threadingandschedulers;
 
 import com.annakhuseinova.Util;
 import reactor.core.publisher.Flux;
-import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
-/**
- *   BigDecimal bigDecimal = new BigDecimal(87657);
- *   NumberFormat formatter = NumberFormat.getInstance(new Locale("ru"));
- *   System.out.println(formatter.format(bigDecimal.longValue()));
- * */
-public class Lecture2SubscribeOnDemo {
+public class Lecture4PublishOn {
 
     public static void main(String[] args) {
         Flux<Object> flux = Flux.create(fluxSink -> {
             printThreadName("create");
-            fluxSink.next(1);
+            for (int i = 0; i < 4 ; i++) {
+                fluxSink.next(i);
+            }
+            fluxSink.complete();
         }).doOnNext(item -> printThreadName("next " + item));
+
         flux
-                .doFirst(()-> printThreadName("first2"))
-                .subscribeOn(Schedulers.boundedElastic())
-                .doFirst(()-> printThreadName("first1"))
-                .subscribe(value -> printThreadName("subscription " + value));
+                .publishOn(Schedulers.boundedElastic())
+                .doOnNext(item -> printThreadName("next " + item))
+                .subscribe(value -> printThreadName("sub " + value));
         Util.sleepSeconds(5);
     }
 
