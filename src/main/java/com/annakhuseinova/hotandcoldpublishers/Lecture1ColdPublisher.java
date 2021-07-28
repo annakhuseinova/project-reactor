@@ -9,7 +9,8 @@ import java.util.stream.Stream;
 public class Lecture1ColdPublisher {
 
     public static void main(String[] args) {
-        Flux<String> movieStream =  Flux.fromStream(()-> getMovie()).delayElements(Duration.ofSeconds(2));
+        Flux<String> movieStream =  Flux.fromStream(()-> getMovie())
+                .delayElements(Duration.ofSeconds(2));
         movieStream.subscribe(Util.subscriber("sam"));
         Util.sleepSeconds(5);
 
