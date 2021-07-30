@@ -2,15 +2,18 @@ package com.annakhuseinova.repeatandretry;
 
 import com.annakhuseinova.Util;
 import reactor.core.publisher.Flux;
+import reactor.util.retry.Retry;
 
+import java.time.Duration;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Lecture2Retry {
+public class Lecture3RetryWhen {
 
     private static AtomicInteger atomicInteger = new AtomicInteger(1);
+
     public static void main(String[] args) {
         getIntegers()
-                .retry()
+                .retryWhen(Retry.fixedDelay(2, Duration.ofSeconds(2)))
                 .subscribe(Util.subscriber());
     }
 
