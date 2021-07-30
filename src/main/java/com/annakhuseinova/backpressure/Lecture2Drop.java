@@ -15,7 +15,7 @@ public class Lecture2Drop {
 
         List<Object> list = new ArrayList<>();
         Flux.create(fluxSink -> {
-            for (int i = 0; i < 501; i++) {
+            for (int i = 1; i < 201; i++) {
                 fluxSink.next(i);
                 System.out.println("Pushed : " + i);
                 try {

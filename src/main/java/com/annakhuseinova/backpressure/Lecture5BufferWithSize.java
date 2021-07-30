@@ -4,24 +4,19 @@ import com.annakhuseinova.Util;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
-public class Lecture3Latest {
+public class Lecture5BufferWithSize {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.setProperty("reactor.bufferSize.small", "16");
+     //   System.setProperty("reactor.bufferSize.small", "16");
 
         Flux.create(fluxSink -> {
-            for (int i = 0; i < 501; i++) {
+            for (int i = 0; i < 201; i++) {
                 fluxSink.next(i);
                 System.out.println("Pushed : " + i);
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
             fluxSink.complete();
-        }).onBackpressureLatest()
+        }).onBackpressureBuffer(50, item -> System.out.println("Dropped: " + item))
                 .publishOn(Schedulers.boundedElastic())
                 .doOnNext(item -> {
                     try {
@@ -32,6 +27,6 @@ public class Lecture3Latest {
                 })
                 .subscribe(Util.subscriber());
 
-        Util.sleepSeconds(10);
+        Util.sleepSeconds(20);
     }
 }

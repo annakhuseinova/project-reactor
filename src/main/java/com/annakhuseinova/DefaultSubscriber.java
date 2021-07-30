@@ -30,6 +30,7 @@ public class DefaultSubscriber implements Subscriber<Object> {
     @Override
     public void onError(Throwable throwable) {
         System.out.println(name + "ERROR : " + throwable.getMessage());
+        System.out.println(throwable.getClass());
     }
 
     @Override

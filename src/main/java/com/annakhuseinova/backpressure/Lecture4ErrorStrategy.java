@@ -4,14 +4,14 @@ import com.annakhuseinova.Util;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
-public class Lecture3Latest {
+public class Lecture4ErrorStrategy {
 
     public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("reactor.bufferSize.small", "16");
 
         Flux.create(fluxSink -> {
-            for (int i = 0; i < 501; i++) {
+            for (int i = 0; i < 501 && !fluxSink.isCancelled(); i++) {
                 fluxSink.next(i);
                 System.out.println("Pushed : " + i);
                 try {
@@ -21,7 +21,7 @@ public class Lecture3Latest {
                 }
             }
             fluxSink.complete();
-        }).onBackpressureLatest()
+        }).onBackpressureError()
                 .publishOn(Schedulers.boundedElastic())
                 .doOnNext(item -> {
                     try {
