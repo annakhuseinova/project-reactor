@@ -1,4 +1,4 @@
-package com.annakhuseinova.backpressure;
+package com.annakhuseinova.combiningpublishers;
 
 import com.annakhuseinova.Util;
 import reactor.core.publisher.Flux;
