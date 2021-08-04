@@ -11,7 +11,8 @@ public class Lecture6Assignment {
         final int carPrice = 10000;
         Flux.combineLatest(monthStream(), demandStream(), (month, demand)-> {
             return (carPrice - (month * 100)) * demand;
-        }).subscribe(Util.subscriber());
+        }).
+                subscribe(Util.subscriber());
 
         Util.sleepSeconds(20);
     }
