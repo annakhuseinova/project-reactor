@@ -10,6 +10,7 @@ public class Lecture1StepVerifierDemo {
     public void test1(){
         Flux<Integer> just = Flux.just(1, 2, 3);
 
+        // we can define expected values by expectNext(...)
         StepVerifier.create(just)
                 .expectNext(1)
                 .expectNext(2)
@@ -17,6 +18,7 @@ public class Lecture1StepVerifierDemo {
                 .verifyComplete();
     }
 
+    // we can define expected values in just one expectNext method
     @Test
     public void test2(){
         Flux<Integer> just = Flux.just(1, 2, 3);

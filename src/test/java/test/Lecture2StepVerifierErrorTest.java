@@ -14,6 +14,7 @@ public class Lecture2StepVerifierErrorTest {
 
         StepVerifier.create(concatenatedFlux)
         .expectNext(1, 2, 3)
+                // check if the publisher signals error
         .verifyError();
     }
 }

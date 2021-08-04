@@ -14,6 +14,7 @@ public class Lecture3StepVerifierErrorTypeCheck {
 
         StepVerifier.create(concat)
                 .expectNext(1, 2, 3)
+                // check that publisher emits error of a particular kind
                 .verifyError(RuntimeException.class);
     }
 }

@@ -14,6 +14,7 @@ class Lecture4StepVerifierErrorMessage {
 
         StepVerifier.create(concat)
                 .expectNext(1,  2, 3)
+                // check that publisher emits error with a particular message
                 .verifyErrorMessage("oops");
     }
 }
